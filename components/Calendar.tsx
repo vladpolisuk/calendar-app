@@ -1,6 +1,7 @@
 import React from 'react';
 import { CalendarGrid } from './CalendarGrid';
 import { CalendarHeader } from './CalendarHeader';
+import { CalendarLinks } from './CalendarLinks';
 import styled from 'styled-components';
 
 const CalendarStyled = styled.div`
@@ -16,6 +17,7 @@ export const Calendar = () => {
         <CalendarStyled>
             <CalendarHeader />
             <CalendarGrid />
+            <CalendarLinks />
         </CalendarStyled>
     )
 };
