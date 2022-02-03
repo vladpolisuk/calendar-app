@@ -5,8 +5,9 @@ const initialState: CalendarState = {
 	currentDay: '',
 	currentMonth: '',
 	currentYear: '',
-	daysOfCurrentCalendar: [],
-	previousDaysOfCurrentCalendar: [],
+	startDayOfWeek: 1,
+	currentDaysOfCalendar: [],
+	previousDaysOfCalendar: [],
 	nextDaysOfCalendar: [],
 };
 
