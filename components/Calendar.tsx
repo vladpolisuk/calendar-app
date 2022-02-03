@@ -1,4 +1,5 @@
 import React from 'react';
+import { CalendarGrid } from './CalendarGrid';
 import { CalendarHeader } from './CalendarHeader';
 import styled from 'styled-components';
 
@@ -14,6 +15,7 @@ export const Calendar = () => {
     return (
         <CalendarStyled>
             <CalendarHeader />
+            <CalendarGrid />
         </CalendarStyled>
     )
 };
