@@ -12,6 +12,12 @@ export const setStartDayOfWeek = (startDayOfWeek: number) => {
 	};
 };
 
+export const setWeekDays = () => {
+	return async (dispatch: AppDispatch) => {
+		dispatch(calendarActions.settedWeekDays());
+	};
+};
+
 export const setCurrentDay = () => {
 	return async (dispatch: AppDispatch) => {
 		const currentDay = moment().format('DD');
@@ -30,6 +36,13 @@ export const setCurrentYear = () => {
 	return async (dispatch: AppDispatch) => {
 		const currentYear = moment().format('YYYY');
 		dispatch(calendarActions.settedCurrentYear(currentYear));
+	};
+};
+
+export const setCurrentDate = () => {
+	return async (dispatch: AppDispatch) => {
+		const currentDate = moment().format('DD-MM-YYYY');
+		dispatch(calendarActions.settedCurrentDate(currentDate));
 	};
 };
 

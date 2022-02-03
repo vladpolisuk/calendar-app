@@ -6,11 +6,12 @@ const initialState: CalendarState = {
 	currentDay: '',
 	currentMonth: '',
 	currentYear: '',
+	currentDate: '',
 	startDayOfWeek: 0,
 	currentDaysOfCalendar: [],
 	previousDaysOfCalendar: [],
 	nextDaysOfCalendar: [],
-	weekDays: moment.weekdaysShort(),
+	weekDays: [],
 };
 
 const calendarSlice = createSlice({
@@ -28,6 +29,9 @@ const calendarSlice = createSlice({
 		},
 		settedCurrentYear(state, action: PayloadAction<string>) {
 			state.currentYear = action.payload;
+		},
+		settedCurrentDate(state, action: PayloadAction<string>) {
+			state.currentDate = action.payload;
 		},
 		settedCurrentDaysOfCalendar(state, action: PayloadAction<DayOfCalendar[]>) {
 			state.currentDaysOfCalendar = action.payload;

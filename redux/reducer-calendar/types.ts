@@ -2,6 +2,7 @@ export type CalendarState = {
 	currentDay: string;
 	currentMonth: string;
 	currentYear: string;
+	currentDate: string;
 	startDayOfWeek: number;
 	currentDaysOfCalendar: DayOfCalendar[];
 	previousDaysOfCalendar: DayOfCalendar[];
