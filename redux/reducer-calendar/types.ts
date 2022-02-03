@@ -6,6 +6,7 @@ export type CalendarState = {
 	currentDaysOfCalendar: DayOfCalendar[];
 	previousDaysOfCalendar: DayOfCalendar[];
 	nextDaysOfCalendar: DayOfCalendar[];
+	weekDays: string[];
 };
 
 export type DayOfCalendar = {

@@ -1,14 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { CalendarState } from './types';
+import moment from 'moment';
 
 const initialState: CalendarState = {
 	currentDay: '',
 	currentMonth: '',
 	currentYear: '',
-	startDayOfWeek: 1,
+	startDayOfWeek: 0,
 	currentDaysOfCalendar: [],
 	previousDaysOfCalendar: [],
 	nextDaysOfCalendar: [],
+	weekDays: moment.weekdaysShort(),
 };
 
 const calendarSlice = createSlice({
