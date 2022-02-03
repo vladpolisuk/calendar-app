@@ -3,6 +3,8 @@ body {
 	padding: 0;
 	margin: 0;
 	font-family: 'Inter', Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif;
+	background-color: #16171c;
+	color: white;
 }
 
 ul {
@@ -16,6 +18,29 @@ a {
 	text-decoration: none;
 }
 
+a:hover {
+	text-decoration: underline;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+b,
+strong {
+	padding: 0;
+	margin: 0;
+}
+
+button {
+	cursor: pointer;
+}
+
 * {
 	box-sizing: border-box;
+	transition: 100ms;
+	animation-timing-function: ease-in-out;
 }
