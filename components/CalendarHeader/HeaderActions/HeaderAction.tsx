@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, MouseEventHandler } from 'react';
 import styled from 'styled-components';
 
 const HeaderActionStyled = styled.li`
@@ -28,6 +28,7 @@ interface Props {
     text?: string;
     icon?: JSX.Element;
     iconPosition?: 'left' | 'right' | 'center';
+    action?: MouseEventHandler<HTMLLIElement>;
 }
 
 const buttonsDirections = {
@@ -52,9 +53,9 @@ const buttonsDirections = {
     'center': (icon: JSX.Element | undefined) => icon
 }
 
-export const HeaderAction: FC<Props> = ({ text = '', icon, iconPosition = 'left' }) => {
+export const HeaderAction: FC<Props> = ({ text = '', icon, iconPosition = 'left', action }) => {
     return (
-        <HeaderActionStyled>
+        <HeaderActionStyled onClick={action}>
             <ActionButtonStyled aria-label={`${text}`}>
                 {buttonsDirections[iconPosition](icon, text)}
             </ActionButtonStyled>

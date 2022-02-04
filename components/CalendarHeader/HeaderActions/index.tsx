@@ -1,8 +1,14 @@
-import React from 'react';
-import styled from 'styled-components';
-import { HeaderAction } from './HeaderAction';
+import moment from 'moment';
+import React, { MouseEventHandler } from 'react';
 import { FaCaretLeft, FaCaretRight } from 'react-icons/fa';
 import { FiSettings } from 'react-icons/fi';
+import styled from 'styled-components';
+import { useAppDispatch, useAppSelector } from '../../../hooks/store';
+import { setShowingDate } from '../../../redux/reducer-calendar/actions';
+import { getCurrentDate, getShowingDate } from '../../../redux/reducer-calendar/selectors';
+import { fromCurrentDateToShowingDate } from '../../../utils/fromCurrentDateToShowingDate';
+import { fromShowingDateToCurrentDate } from '../../../utils/fromShowingDateToCurrentDate';
+import { HeaderAction } from './HeaderAction';
 
 const HeaderActionsStyled = styled.ul`
     display: flex;
@@ -11,11 +17,48 @@ const HeaderActionsStyled = styled.ul`
 `;
 
 export const HeaderActions = () => {
+    const showingDate = useAppSelector(getShowingDate);
+    const currentDate = useAppSelector(getCurrentDate);
+    const dispatch = useAppDispatch();
+
+    const prevMonthAction: MouseEventHandler<HTMLLIElement> = (event) => {
+        const currentDate = fromShowingDateToCurrentDate(showingDate);
+        const prevMonth = moment(currentDate).add(-1, 'month').format('MM-YYYY');
+        dispatch(setShowingDate(prevMonth))
+    }
+
+    const nextMonthAction: MouseEventHandler<HTMLLIElement> = (event) => {
+        const currentDate = fromShowingDateToCurrentDate(showingDate);
+        const nextMonth = moment(currentDate).add(1, 'month').format('MM-YYYY');
+        dispatch(setShowingDate(nextMonth))
+    }
+
+    const todayAction: MouseEventHandler<HTMLLIElement> = (event) => {
+        const today = fromCurrentDateToShowingDate(currentDate);
+        dispatch(setShowingDate(today))
+    }
+
     return (
         <HeaderActionsStyled>
-            <HeaderAction text='Prev Month' icon={<FaCaretLeft />} iconPosition="left" />
-            <HeaderAction text='Next Month' icon={<FaCaretRight />} iconPosition="right" />
-            <HeaderAction icon={<FiSettings />} iconPosition='center' />
+            <HeaderAction
+                text='Prev Month'
+                action={prevMonthAction}
+                icon={<FaCaretLeft />}
+                iconPosition="left" />
+
+            <HeaderAction
+                text='Next Month'
+                action={nextMonthAction}
+                icon={<FaCaretRight />}
+                iconPosition="right" />
+
+            <HeaderAction
+                text='Today'
+                action={todayAction} />
+
+            <HeaderAction
+                icon={<FiSettings />}
+                iconPosition='center' />
         </HeaderActionsStyled>
     )
 };
