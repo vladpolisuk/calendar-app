@@ -1,9 +1,8 @@
 import moment from 'moment';
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { useAppDispatch, useAppSelector } from '../../hooks/store';
-import { setCurrentMonth, setCurrentYear } from '../../redux/reducer-calendar/actions';
-import { getCurrentMonth, getCurrentYear } from '../../redux/reducer-calendar/selectors';
+import { useAppSelector } from '../../hooks/store';
+import { getShowingDate } from '../../redux/reducer-calendar/selectors';
 
 const HeaderTitleStyled = styled.h1`
     font-size: 28px;
@@ -11,16 +10,9 @@ const HeaderTitleStyled = styled.h1`
 `;
 
 export const HeaderTitle = () => {
-    const currentMonth = useAppSelector(getCurrentMonth);
-    const currentYear = useAppSelector(getCurrentYear);
-
-    const dispatch = useAppDispatch();
-
-    useEffect(() => {
-        dispatch(setCurrentMonth());
-        dispatch(setCurrentYear());
-    }, [dispatch])
-
+    const showingDate = useAppSelector(getShowingDate);
+    const currentMonth = showingDate.split('-')[0];
+    const currentYear = showingDate.split('-')[1];
     const currentMonthText = moment.months()[+currentMonth - 1];
 
     return (

@@ -48,12 +48,14 @@ const CalendarDayNumberStyled = styled.button`
 `;
 
 interface Props {
-    dayNumber: string;
+    date: string;
     isActive: boolean;
     isAnotherMonth: boolean;
 }
 
-export const CalendarDay: FC<Props> = memo(({ dayNumber, isActive, isAnotherMonth }) => {
+export const CalendarDay: FC<Props> = memo(({ date, isActive, isAnotherMonth }) => {
+    const dayNumber = date.split('-')[1];
+
     return (
         <CalendarDayStyled>
             <CalendarDayButtonStyled isAnotherMonth={isAnotherMonth}>

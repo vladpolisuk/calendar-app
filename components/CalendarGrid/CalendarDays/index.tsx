@@ -1,9 +1,8 @@
-import moment from 'moment';
 import React, { useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../../hooks/store';
-import { setCurrentDate, setCurrentDaysOfCalendar } from '../../../redux/reducer-calendar/actions';
-import { getCurrentDate, getCurrentDaysOfCalendar } from '../../../redux/reducer-calendar/selectors';
+import { setCurrentDaysOfCalendar } from '../../../redux/reducer-calendar/actions';
+import { getCurrentDate, getCurrentDaysOfCalendar, getShowingDate } from '../../../redux/reducer-calendar/selectors';
 import { CalendarDay } from './CalendarDay';
 
 const CalendarGridStyled = styled.ul`
@@ -16,22 +15,24 @@ const CalendarGridStyled = styled.ul`
 export const CalendarDays = () => {
     const daysOfCalendar = useAppSelector(getCurrentDaysOfCalendar);
     const currentDate = useAppSelector(getCurrentDate);
+    const showingDate = useAppSelector(getShowingDate)
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(setCurrentDaysOfCalendar());
-        dispatch(setCurrentDate());
-    }, [dispatch])
+        if (showingDate) dispatch(setCurrentDaysOfCalendar(showingDate));
+    }, [dispatch, showingDate])
 
     const components = useMemo(() => {
-        return daysOfCalendar.map(({ dayNumber, monthNumber, yearNumber }) => {
-            const key = `${dayNumber}_${Math.random() * Math.random() * 100}`;
-            const isCurrentDay = `${dayNumber}-${monthNumber}-${yearNumber}` === currentDate;
-            const isAnotherMonth = monthNumber !== moment().format('MM');
+        return daysOfCalendar.map(({ date }) => {
+            const key = `${date}_${Math.random() * Math.random()}`;
+            const monthNumber = date.split('-')[0];
+            const showingMonth = showingDate.split('-')[0];
+            const isCurrentDay = date === currentDate;
+            const isAnotherMonth = monthNumber !== showingMonth;
 
             return <CalendarDay
                 key={key}
-                dayNumber={dayNumber}
+                date={date}
                 isAnotherMonth={isAnotherMonth}
                 isActive={isCurrentDay} />
         })

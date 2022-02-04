@@ -1,21 +1,12 @@
 export type CalendarState = {
-	currentDay: string;
-	currentMonth: string;
-	currentYear: string;
 	currentDate: string;
-	startDayOfWeek: number;
+	showingDate: string;
 	currentDaysOfCalendar: DayOfCalendar[];
-	previousDaysOfCalendar: DayOfCalendar[];
-	nextDaysOfCalendar: DayOfCalendar[];
 	weekDays: string[];
 };
 
 export type DayOfCalendar = {
-	dayNumber: string;
-	monthNumber: string;
-	yearNumber: string;
-	weekNumber: number;
-	dayIndexOfWeek: number;
+	date: string;
 	events: Event[] | [];
 	tasks: Task[] | [];
 	reminds: Remind[] | [];

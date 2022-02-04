@@ -3,14 +3,9 @@ import { CalendarState, DayOfCalendar } from './types';
 import moment from 'moment';
 
 const initialState: CalendarState = {
-	currentDay: '',
-	currentMonth: '',
-	currentYear: '',
 	currentDate: '',
-	startDayOfWeek: 0,
+	showingDate: '',
 	currentDaysOfCalendar: [],
-	previousDaysOfCalendar: [],
-	nextDaysOfCalendar: [],
 	weekDays: [],
 };
 
@@ -18,29 +13,14 @@ const calendarSlice = createSlice({
 	name: 'calendar',
 	initialState,
 	reducers: {
-		settedStartDayOfWeek(state, action: PayloadAction<number>) {
-			state.startDayOfWeek = action.payload;
-		},
-		settedCurrentDay(state, action: PayloadAction<string>) {
-			state.currentDay = action.payload;
-		},
-		settedCurrentMonth(state, action: PayloadAction<string>) {
-			state.currentMonth = action.payload;
-		},
-		settedCurrentYear(state, action: PayloadAction<string>) {
-			state.currentYear = action.payload;
-		},
 		settedCurrentDate(state, action: PayloadAction<string>) {
 			state.currentDate = action.payload;
 		},
+		settedShowingDate(state, action: PayloadAction<string>) {
+			state.showingDate = action.payload;
+		},
 		settedCurrentDaysOfCalendar(state, action: PayloadAction<DayOfCalendar[]>) {
 			state.currentDaysOfCalendar = action.payload;
-		},
-		settedPreviousDaysOfCalendar(state, action: PayloadAction<DayOfCalendar[]>) {
-			state.previousDaysOfCalendar = action.payload;
-		},
-		settedNextDaysOfCalendar(state, action: PayloadAction<DayOfCalendar[]>) {
-			state.nextDaysOfCalendar = action.payload;
 		},
 		settedWeekDays(state) {
 			state.weekDays = moment.weekdaysShort(true);
