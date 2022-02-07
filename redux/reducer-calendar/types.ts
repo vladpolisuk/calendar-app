@@ -20,3 +20,5 @@ export type Event = {
 	eventType: 'event' | 'task' | 'reminder';
 	eventColor: string;
 };
+
+export type ChangedEventData = Omit<Event, 'eventId' | 'eventType' | 'eventDate'>;

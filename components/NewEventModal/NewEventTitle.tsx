@@ -1,7 +1,7 @@
-import React, { ChangeEventHandler, FC } from 'react';
+import React, { ChangeEventHandler, FC, memo } from 'react';
 import styled from 'styled-components';
 
-const TitleInputStyled = styled.input`
+const NewEventTitleStyled = styled.input`
     outline: none;
     margin-right: 10px;
     background: transparent;
@@ -25,17 +25,17 @@ interface Props {
     value: string;
 };
 
-export const ModalHeaderTitleInput: FC<Props> = ({ onChange, selectedEventType, value }) => {
+export const NewEventTitle: FC<Props> = memo(({ onChange, selectedEventType, value }) => {
     const onTitleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
         event.preventDefault()
         onChange(event.target.value);
     }
 
     return (
-        <TitleInputStyled
+        <NewEventTitleStyled
             value={value}
             onChange={onTitleChange}
-            aria-label={`Write ${selectedEventType} title`}
-            placeholder='Add title ...' />
+            placeholder='Add title ...'
+            aria-label={`Write ${selectedEventType} title`} />
     )
-};
+});

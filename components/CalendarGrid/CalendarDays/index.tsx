@@ -1,11 +1,12 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../../hooks/store';
-import { createNewEvent, setCurrentDaysOfCalendar } from '../../../redux/reducer-calendar/actions';
+import { createNewEvent, deleteEventById, editEventById, setCurrentDaysOfCalendar } from '../../../redux/reducer-calendar/actions';
 import { getCurrentDate, getCurrentDaysOfCalendar, getShowingDate } from '../../../redux/reducer-calendar/selectors';
-import { Event } from '../../../redux/reducer-calendar/types';
+import { ChangedEventData, Event } from '../../../redux/reducer-calendar/types';
+import { EventEditorModal } from '../../EventEditorModal';
+import { NewEventModal } from '../../NewEventModal';
 import { CalendarDay } from './CalendarDay';
-import { CalenderDayNewEventModal } from './CalendarDayNewEventModal.tsx';
 
 const CalendarGridStyled = styled.ul`
     display: grid;
@@ -19,7 +20,9 @@ export const CalendarDays = () => {
     const currentDate = useAppSelector(getCurrentDate);
     const showingDate = useAppSelector(getShowingDate)
     const dispatch = useAppDispatch();
-    const [isOpen, setIsOpen] = useState(false);
+    const [newEventModalIsOpen, setNewEventModalIsOpen] = useState(false);
+    const [eventEditorIsOpen, setEventEditorIsOpen] = useState(false);
+    const [eventEditorValues, setEventEditorValues] = useState({} as Event);
     const [modalDate, setModalDate] = useState('');
 
     const onSubmitNewEvent = (event: Event) => {
@@ -28,11 +31,28 @@ export const CalendarDays = () => {
 
     const openNewEventModal = (date: string) => {
         setModalDate(date)
-        setIsOpen(true);
+        setNewEventModalIsOpen(true);
     }
 
     const closeNewEventModal = () => {
-        setIsOpen(false);
+        setNewEventModalIsOpen(false);
+    }
+
+    const onSubmitChangedEvent = (eventId: string, event: ChangedEventData) => {
+        dispatch(editEventById(eventId, event));
+    }
+
+    const onDeleteEvent = (eventId: string) => {
+        dispatch(deleteEventById(eventId));
+    }
+
+    const openEventEditor = (event: Event) => {
+        setEventEditorValues(event)
+        setEventEditorIsOpen(true)
+    }
+
+    const closeEventEditor = () => {
+        setEventEditorIsOpen(false)
     }
 
     useEffect(() => {
@@ -53,20 +73,28 @@ export const CalendarDays = () => {
                 tasks={tasks}
                 events={events}
                 reminders={reminders}
+                isActive={isCurrentDay}
                 isAnotherMonth={isAnotherMonth}
-                openNewEventModal={openNewEventModal}
-                isActive={isCurrentDay} />
+                openEventEditor={openEventEditor}
+                openNewEventModal={openNewEventModal} />
         })
     }, [daysOfCalendar, currentDate])
 
     return (
         <CalendarGridStyled>
             {components}
-            <CalenderDayNewEventModal
-                isOpen={isOpen}
+            <NewEventModal
                 date={modalDate}
                 onSubmit={onSubmitNewEvent}
+                isOpen={newEventModalIsOpen}
                 onClose={closeNewEventModal} />
+
+            <EventEditorModal
+                onDelete={onDeleteEvent}
+                values={eventEditorValues}
+                isOpen={eventEditorIsOpen}
+                onClose={closeEventEditor}
+                onSubmit={onSubmitChangedEvent} />
         </CalendarGridStyled>
     )
 };

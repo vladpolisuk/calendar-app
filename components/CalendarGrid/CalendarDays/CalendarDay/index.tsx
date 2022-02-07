@@ -1,5 +1,4 @@
-/* eslint-disable react/display-name */
-import React, { FC, memo } from 'react';
+import React, { FC, memo, useMemo } from 'react';
 import styled from 'styled-components';
 import { Event } from '../../../../redux/reducer-calendar/types';
 import { CalendarDayContent } from '../CalendarDayContent';
@@ -35,6 +34,7 @@ interface Props {
     tasks: Event[];
     reminders: Event[];
     openNewEventModal: (date: string) => void;
+    openEventEditor: (event: Event) => void;
 }
 
 export const CalendarDay: FC<Props> = memo(({
@@ -45,9 +45,14 @@ export const CalendarDay: FC<Props> = memo(({
     reminders,
     isAnotherMonth,
     openNewEventModal,
+    openEventEditor,
 }) => {
-    const components = [...events, ...tasks, ...reminders]
-    const moreEventsCount = components.length - 4;
+
+    const moreEventsCount = tasks.length + reminders.length + events.length - 4;
+
+    const showMoreButton = moreEventsCount > 0
+        ? <ShowMoreButton dayDate={date} moreEventsCount={moreEventsCount} />
+        : null
 
     return (
         <CalendarDayStyled>
@@ -58,13 +63,10 @@ export const CalendarDay: FC<Props> = memo(({
                     dayDate={date}
                     tasks={tasks}
                     events={events}
-                    reminders={reminders} />
+                    reminders={reminders}
+                    openEventEditor={openEventEditor} />
             </CalendarDayButtonStyled>
-            {moreEventsCount > 0
-                ? <ShowMoreButton
-                    dayDate={date}
-                    moreEventsCount={moreEventsCount} />
-                : ''}
+            {showMoreButton}
             <CalendarDayNumberButton
                 date={date}
                 isActive={isActive} />

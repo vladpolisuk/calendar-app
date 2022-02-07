@@ -1,8 +1,8 @@
-import React, { ChangeEventHandler, FC } from 'react';
+import React, { ChangeEventHandler, FC, memo } from 'react';
 import styled from 'styled-components';
-import { useAutoResize } from '../../../../hooks/ui/useAutoResize';
+import { useAutoResize } from '../../hooks/ui/useAutoResize';
 
-const DescriptionInputStyled = styled.textarea`
+const NewEventDescriptionStyled = styled.textarea`
     width: 100%;
     min-height: 100px;
     background: #ffffff0d;
@@ -28,7 +28,7 @@ interface Props {
     value: string;
 }
 
-export const ModalDescriptionInput: FC<Props> = ({ onChange, selectedEventType, value }) => {
+export const NewEventDescription: FC<Props> = memo(({ onChange, selectedEventType, value }) => {
     const autoResize = useAutoResize();
 
     const onDescriptionChange: ChangeEventHandler<HTMLTextAreaElement> = (event) => {
@@ -37,11 +37,11 @@ export const ModalDescriptionInput: FC<Props> = ({ onChange, selectedEventType, 
     }
 
     return (
-        <DescriptionInputStyled
+        <NewEventDescriptionStyled
             value={value}
             onInput={autoResize}
             onChange={onDescriptionChange}
             aria-label={`Write ${selectedEventType} description`}
             placeholder="Add description ..." />
     )
-};
+});

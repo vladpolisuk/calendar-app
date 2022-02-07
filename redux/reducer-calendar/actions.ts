@@ -4,7 +4,7 @@ import { ResponseStatus } from '../../api/local-storage/models';
 import { fromShowingDateToCurrentDate } from '../../utils/fromShowingDateToCurrentDate';
 import { AppDispatch } from '../store';
 import { calendarActions } from './reducer';
-import { DayOfCalendar, Event } from './types';
+import { ChangedEventData, DayOfCalendar, Event } from './types';
 
 export const setCurrentDate = () => {
 	return async (dispatch: AppDispatch) => {
@@ -67,6 +67,33 @@ export const createNewEvent = (newEvent: Event) => {
 	return async (dispatch: AppDispatch) => {
 		const localStorageApi = new LocalStorageAPI();
 		const { status } = localStorageApi.createNewEvent(newEvent);
-		if (status === ResponseStatus.SUCCESS) dispatch(setCurrentDaysOfCalendar(newEvent.eventDate));
+
+		if (status === ResponseStatus.SUCCESS) {
+			dispatch(setCurrentDaysOfCalendar(newEvent.eventDate));
+		}
+	};
+};
+
+export const editEventById = (eventId: string, changedData: ChangedEventData) => {
+	return async (dispatch: AppDispatch) => {
+		const localStorageApi = new LocalStorageAPI();
+		const { status } = localStorageApi.editEventById(eventId, changedData);
+
+		if (status === ResponseStatus.SUCCESS) {
+			const { eventDate } = localStorageApi.getEventById(eventId);
+			dispatch(setCurrentDaysOfCalendar(eventDate));
+		}
+	};
+};
+
+export const deleteEventById = (eventId: string) => {
+	return async (dispatch: AppDispatch) => {
+		const localStorageApi = new LocalStorageAPI();
+		const { eventDate } = localStorageApi.getEventById(eventId);
+		const { status } = localStorageApi.deleteEventById(eventId);
+
+		if (status === ResponseStatus.SUCCESS) {
+			dispatch(setCurrentDaysOfCalendar(eventDate));
+		}
 	};
 };

@@ -1,6 +1,7 @@
-import React, { FC, MouseEventHandler } from 'react';
-import styled from 'styled-components';
+import React, { FC, memo, MouseEventHandler } from 'react';
 import { MdBookmark, MdEventAvailable, MdOutlineTaskAlt } from 'react-icons/md';
+import styled from 'styled-components';
+import { Event } from '../../../../redux/reducer-calendar/types';
 
 const CalendarEventStyled = styled.button`
     display: flex;
@@ -25,10 +26,8 @@ const EventTitleStyled = styled.p`
     max-width: fit-content;
 `;
 
-interface Props {
-    title: string;
-    type: 'event' | 'task' | 'reminder';
-    bgColor: string;
+interface Props extends Event {
+    openEventEditor: (event: Event) => void;
 }
 
 const icons = {
@@ -37,17 +36,20 @@ const icons = {
     'reminder': <MdBookmark size="13px" style={{ minWidth: '13px' }} />,
 }
 
-export const CalendarEvent: FC<Props> = ({ title, type, bgColor }) => {
-    const handler: MouseEventHandler<HTMLButtonElement> = (event) => {
-        event.stopPropagation();
-        console.log('click');
+export const CalendarEvent: FC<Props> = memo(({ openEventEditor, ...event }) => {
+    const openEventEditorHandler: MouseEventHandler<HTMLButtonElement> = (e) => {
+        e.stopPropagation();
+        openEventEditor(event)
     }
+
     return (
-        <CalendarEventStyled onClick={handler} bgColor={bgColor}>
-            {icons[type]}
+        <CalendarEventStyled
+            onClick={openEventEditorHandler}
+            bgColor={event.eventColor}>
+            {icons[event.eventType]}
             <EventTitleStyled>
-                {title}
+                {event.eventTitle}
             </EventTitleStyled>
         </CalendarEventStyled>
     )
-};
+})

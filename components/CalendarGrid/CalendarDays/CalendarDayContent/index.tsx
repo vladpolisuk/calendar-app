@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import styled from 'styled-components';
 import uniqid from 'uniqid';
 import { Event } from '../../../../redux/reducer-calendar/types';
@@ -13,34 +13,34 @@ interface Props {
     reminders: Event[];
     tasks: Event[];
     dayDate: string;
+    openEventEditor: (event: Event) => void;
 }
 
-export const CalendarDayContent: FC<Props> = ({ events, tasks, reminders }) => {
-    const eventsComponents = events.map(({ eventId, eventColor, eventTitle, eventType }) => {
-        const key = uniqid(`${eventId}_`);
+export const CalendarDayContent: FC<Props> = memo(({
+    events,
+    tasks,
+    reminders,
+    openEventEditor,
+}) => {
+    const eventsComponents = events.map((event) => {
         return <CalendarEvent
-            key={key}
-            bgColor={eventColor}
-            title={eventTitle}
-            type={eventType} />
+            key={uniqid(`${event.eventId}_`)}
+            openEventEditor={openEventEditor}
+            {...event} />
     })
 
-    const tasksComponents = tasks.map(({ eventId, eventColor, eventTitle, eventType }) => {
-        const key = uniqid(`${eventId}_`);
+    const tasksComponents = tasks.map((event) => {
         return <CalendarEvent
-            key={key}
-            bgColor={eventColor}
-            title={eventTitle}
-            type={eventType} />
+            key={uniqid(`${event.eventId}_`)}
+            openEventEditor={openEventEditor}
+            {...event} />
     })
 
-    const remindersComponents = reminders.map(({ eventId, eventColor, eventTitle, eventType }) => {
-        const key = uniqid(`${eventId}_`);
+    const remindersComponents = reminders.map((event) => {
         return <CalendarEvent
-            key={key}
-            bgColor={eventColor}
-            title={eventTitle}
-            type={eventType} />
+            key={uniqid(`${event.eventId}_`)}
+            openEventEditor={openEventEditor}
+            {...event} />
     })
 
     const components = [...remindersComponents, ...tasksComponents, ...eventsComponents];
@@ -51,4 +51,4 @@ export const CalendarDayContent: FC<Props> = ({ events, tasks, reminders }) => {
             {last4Events}
         </CalendarDayContentStyled>
     )
-};
+})

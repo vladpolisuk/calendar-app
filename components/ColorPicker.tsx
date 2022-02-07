@@ -1,4 +1,4 @@
-import React, { FC, MouseEventHandler } from 'react';
+import React, { FC, memo, MouseEventHandler, useEffect } from 'react';
 import styled from 'styled-components';
 
 const NewEventColorPickerStyled = styled.div`
@@ -23,16 +23,21 @@ const NewEventColorStyled = styled.button`
 
 interface Props {
     onSubmit: (data: any) => void;
-    selectedEventType: string;
     eventColor: string;
+    selectedEventType?: string;
+    initialColor?: string;
 }
 
-export const NewEventColorPicker: FC<Props> = ({ onSubmit, selectedEventType, eventColor }) => {
+export const ColorPicker: FC<Props> = memo(({ onSubmit, selectedEventType, eventColor, initialColor }) => {
     const selectEventColor: MouseEventHandler<HTMLButtonElement> = (event) => {
         event.preventDefault()
         const target = event.target as HTMLButtonElement;
         onSubmit(target.attributes[0].value);
     }
+
+    useEffect(() => {
+        if (initialColor) onSubmit(initialColor)
+    }, [])
 
     return (
         <NewEventColorPickerStyled>
@@ -85,4 +90,4 @@ export const NewEventColorPicker: FC<Props> = ({ onSubmit, selectedEventType, ev
                 isSelected={eventColor === 'gray' || !eventColor} />
         </NewEventColorPickerStyled>
     )
-};
+});

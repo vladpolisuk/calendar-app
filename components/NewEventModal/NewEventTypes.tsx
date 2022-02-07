@@ -1,12 +1,12 @@
-import React, { FC, MouseEventHandler } from 'react';
+import React, { FC, memo, MouseEventHandler } from 'react';
 import styled from 'styled-components';
-import { Event } from '../../../../redux/reducer-calendar/types';
+import { Event } from '../../redux/reducer-calendar/types';
 
-const ModalHeaderActionsStyled = styled.div`
+const NewEventTypesStyled = styled.div`
     display: flex;
 `;
 
-const ModalHeaderActionStyled = styled.button`
+const NewEventTypeStyled = styled.button`
     background: transparent;
     padding: 5px 8px;
     margin-right: 5px;
@@ -27,37 +27,37 @@ interface Props {
     selected: string;
 }
 
-export const ModalHeaderActions: FC<Props> = ({ onSubmit, selected }) => {
+export const NewEventTypes: FC<Props> = memo(({ onSubmit, selected }) => {
     const setEventType: MouseEventHandler<HTMLButtonElement> = (event) => {
         const target = event.target as HTMLButtonElement;
         onSubmit((target.name as Event['eventType']));
     }
 
     return (
-        <ModalHeaderActionsStyled>
-            <ModalHeaderActionStyled
+        <NewEventTypesStyled>
+            <NewEventTypeStyled
                 name="event"
                 onClick={setEventType}
                 aria-label="Choose 'event' variant"
                 isSelected={selected === 'event'}>
                 Event
-            </ModalHeaderActionStyled>
+            </NewEventTypeStyled>
 
-            <ModalHeaderActionStyled
+            <NewEventTypeStyled
                 name="task"
                 onClick={setEventType}
                 aria-label="Choose 'task' variant"
                 isSelected={selected === 'task'}>
                 Task
-            </ModalHeaderActionStyled>
+            </NewEventTypeStyled>
 
-            <ModalHeaderActionStyled
+            <NewEventTypeStyled
                 name="reminder"
                 onClick={setEventType}
                 aria-label="Choose 'reminder' variant"
                 isSelected={selected === 'reminder'}>
                 Reminder
-            </ModalHeaderActionStyled>
-        </ModalHeaderActionsStyled>
+            </NewEventTypeStyled>
+        </NewEventTypesStyled>
     )
-};
+});
