@@ -22,9 +22,10 @@ const TitleInputStyled = styled.input`
 interface Props {
     onChange: (data: any) => void;
     selectedEventType: string;
+    value: string;
 };
 
-export const ModalHeaderTitleInput: FC<Props> = ({ onChange, selectedEventType }) => {
+export const ModalHeaderTitleInput: FC<Props> = ({ onChange, selectedEventType, value }) => {
     const onTitleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
         event.preventDefault()
         onChange(event.target.value);
@@ -32,6 +33,7 @@ export const ModalHeaderTitleInput: FC<Props> = ({ onChange, selectedEventType }
 
     return (
         <TitleInputStyled
+            value={value}
             onChange={onTitleChange}
             aria-label={`Write ${selectedEventType} title`}
             placeholder='Add title ...' />

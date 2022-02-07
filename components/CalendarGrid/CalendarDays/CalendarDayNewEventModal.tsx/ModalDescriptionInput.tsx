@@ -25,9 +25,10 @@ const DescriptionInputStyled = styled.textarea`
 interface Props {
     onChange: (data: any) => void;
     selectedEventType: string;
+    value: string;
 }
 
-export const ModalDescriptionInput: FC<Props> = ({ onChange, selectedEventType }) => {
+export const ModalDescriptionInput: FC<Props> = ({ onChange, selectedEventType, value }) => {
     const autoResize = useAutoResize();
 
     const onDescriptionChange: ChangeEventHandler<HTMLTextAreaElement> = (event) => {
@@ -37,6 +38,7 @@ export const ModalDescriptionInput: FC<Props> = ({ onChange, selectedEventType }
 
     return (
         <DescriptionInputStyled
+            value={value}
             onInput={autoResize}
             onChange={onDescriptionChange}
             aria-label={`Write ${selectedEventType} description`}

@@ -1,14 +1,15 @@
 /* eslint-disable react/display-name */
 import React, { FC, memo, MouseEventHandler, useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import FocusLock from 'react-focus-lock';
 import { IoMdClose } from 'react-icons/io';
 import styled, { css, keyframes } from 'styled-components';
+import uniqid from 'uniqid';
+import { Event } from '../../../../redux/reducer-calendar/types';
 import { ModalDescriptionInput } from './ModalDescriptionInput';
 import { ModalHeaderActions } from './ModalHeaderActions';
 import { ModalHeaderTitleInput } from './ModalHeaderTitleInput';
 import { NewEventColorPicker } from './NewEventColorPicker';
-import uniqid from 'uniqid';
-import { Event } from '../../../../redux/reducer-calendar/types';
 
 const CalenderDayNewEventModalStyled = styled.div`
     display: flex;
@@ -121,8 +122,14 @@ export const CalenderDayNewEventModal: FC<Props> = memo(({ isOpen, onClose, date
     const [description, setDescription] = useState('');
     const [title, setTitle] = useState('');
 
+    const onCloseHandler: MouseEventHandler<HTMLButtonElement> = (event) => {
+        event.stopPropagation();
+        onClose();
+    }
+
     const submit: MouseEventHandler<HTMLButtonElement> = (event) => {
         event.preventDefault()
+        event.stopPropagation();
 
         const id = uniqid('event_#');
 
@@ -144,7 +151,6 @@ export const CalenderDayNewEventModal: FC<Props> = memo(({ isOpen, onClose, date
             eventType: selectedEventType,
             eventColor: color
         })
-        onClose();
     }
 
     useEffect(() => {
@@ -158,13 +164,14 @@ export const CalenderDayNewEventModal: FC<Props> = memo(({ isOpen, onClose, date
         }
     }, [isOpen]);
 
-    return isOpen ? (
+    return isOpen ? createPortal(
         <FocusLock>
             <CalenderDayNewEventModalStyled>
                 <NewEventModalContentStyled isOpen={isOpen}>
                     <NewEventModalContentHeaderStyled>
                         <FormHeaderActionsStyled>
                             <ModalHeaderTitleInput
+                                value={title}
                                 onChange={setTitle}
                                 selectedEventType={selectedEventType} />
 
@@ -175,13 +182,14 @@ export const CalenderDayNewEventModal: FC<Props> = memo(({ isOpen, onClose, date
 
                         <NewEventModalCloseButtonStyled
                             aria-label="Close window"
-                            onClick={() => onClose()}>
+                            onClick={onCloseHandler}>
                             <IoMdClose size="20px" />
                         </NewEventModalCloseButtonStyled>
                     </NewEventModalContentHeaderStyled>
 
                     <NewEventFormStyled>
                         <ModalDescriptionInput
+                            value={description}
                             onChange={setDescription}
                             selectedEventType={selectedEventType} />
 
@@ -199,7 +207,7 @@ export const CalenderDayNewEventModal: FC<Props> = memo(({ isOpen, onClose, date
                             </NewEventCreateEventButton>
 
                             <NewEventDismissEventButton
-                                onClick={() => onClose()}
+                                onClick={onCloseHandler}
                                 aria-label={`Dismiss ${selectedEventType}`}>
                                 Dismiss
                             </NewEventDismissEventButton>
@@ -207,6 +215,5 @@ export const CalenderDayNewEventModal: FC<Props> = memo(({ isOpen, onClose, date
                     </NewEventFormStyled>
                 </NewEventModalContentStyled>
             </CalenderDayNewEventModalStyled>
-        </FocusLock>
-    ) : null;
+        </FocusLock>, document.querySelector('body') as Element) : null;
 });
