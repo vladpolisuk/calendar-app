@@ -1,8 +1,8 @@
 import type { NextPage } from 'next'
-import { Calendar } from '../components/Calendar'
+import { CalendarGrid } from '../components/CalendarGrid'
 
 const Home: NextPage = () => {
-	return <Calendar />
+	return <CalendarGrid />
 }
 
 export default Home
