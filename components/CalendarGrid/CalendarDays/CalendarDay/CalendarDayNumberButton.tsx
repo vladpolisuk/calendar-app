@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import styled from 'styled-components';
 import { useOpenDayView } from '../../../../hooks/ui/useOpenDayView';
 
@@ -31,7 +31,7 @@ interface Props {
     isActive: boolean;
 }
 
-export const CalendarDayNumberButton: FC<Props> = ({ date, isActive }) => {
+export const CalendarDayNumberButton: FC<Props> = memo(({ date, isActive }) => {
     const openDayView = useOpenDayView(date);
     const dayNumber = date.split('-')[1];
 
@@ -43,4 +43,4 @@ export const CalendarDayNumberButton: FC<Props> = ({ date, isActive }) => {
             {dayNumber}
         </CalendarDayNumberButtonStyled>
     )
-};
+});

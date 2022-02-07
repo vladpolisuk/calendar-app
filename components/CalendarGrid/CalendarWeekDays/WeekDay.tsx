@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import styled from 'styled-components';
 
 const WeekDayStyled = styled.li`
@@ -13,10 +13,10 @@ interface Props {
     isActive: boolean;
 }
 
-export const WeekDay: FC<Props> = ({ weekDay, isActive }) => {
+export const WeekDay: FC<Props> = memo(({ weekDay, isActive }) => {
     return (
         <WeekDayStyled isActive={isActive}>
             <p>{weekDay}</p>
         </WeekDayStyled>
     )
-};
+})
