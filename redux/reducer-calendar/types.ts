@@ -7,21 +7,16 @@ export type CalendarState = {
 
 export type DayOfCalendar = {
 	date: string;
-	events: Event[] | [];
-	tasks: Task[] | [];
-	reminds: Remind[] | [];
+	events: Event[];
+	tasks: Event[];
+	reminders: Event[];
 };
 
-export type Task = {
-	title: string;
-	description: string;
-};
-
-export type Event = Task & {
-	importance: 'High' | 'Medium' | 'Low';
-	time: string;
-};
-
-export type Remind = Task & {
-	time: string;
+export type Event = {
+	eventId: string;
+	eventDate: string;
+	eventTitle: string;
+	eventDescription: string;
+	eventType: 'event' | 'task' | 'reminder';
+	eventColor: string;
 };
