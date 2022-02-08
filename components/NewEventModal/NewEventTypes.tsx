@@ -1,6 +1,6 @@
-import React, { FC, memo, MouseEventHandler } from 'react';
+import React, { FC, memo, MouseEventHandler, useEffect } from 'react';
 import styled from 'styled-components';
-import { Event } from '../../redux/reducer-calendar/types';
+import { Event, EventTypes } from '../../redux/reducer-calendar/types';
 
 const NewEventTypesStyled = styled.div`
     display: flex;
@@ -23,15 +23,20 @@ const NewEventTypeStyled = styled.button`
 `;
 
 interface Props {
-    onSubmit: (data: Event['eventType']) => void;
-    selected: string;
+    onSubmit: (data: EventTypes) => void;
+    selected: EventTypes;
+    initialValue?: EventTypes;
 }
 
-export const NewEventTypes: FC<Props> = memo(({ onSubmit, selected }) => {
+export const NewEventTypes: FC<Props> = memo(({ onSubmit, selected, initialValue }) => {
     const setEventType: MouseEventHandler<HTMLButtonElement> = (event) => {
         const target = event.target as HTMLButtonElement;
-        onSubmit((target.name as Event['eventType']));
+        onSubmit((target.name as EventTypes));
     }
+
+    useEffect(() => {
+        if (initialValue) onSubmit(initialValue);
+    }, [])
 
     return (
         <NewEventTypesStyled>

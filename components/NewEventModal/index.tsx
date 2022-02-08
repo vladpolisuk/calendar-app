@@ -3,7 +3,7 @@ import uniqid from 'uniqid';
 import { Modal } from '../../common/Modal';
 import { ModalWindow } from '../../common/Modal/ModalWindow';
 import { ModalWindowHeader } from '../../common/Modal/ModalWindowHeader';
-import { Event } from '../../redux/reducer-calendar/types';
+import { Event, EventTypes } from '../../redux/reducer-calendar/types';
 import { ColorPicker } from '../../common/ColorPicker';
 import { NewEventActions } from './NewEventActions';
 import { NewEventDescription } from './NewEventDescription';
@@ -15,10 +15,11 @@ interface Props {
     isOpen: boolean;
     onClose: () => void;
     onSubmit: (event: Event) => void;
+    initialValues?: Event;
 }
 
-export const NewEventModal: FC<Props> = memo(({ isOpen, date, onClose, onSubmit }) => {
-    const [selectedEventType, setSelectedEventType] = useState<Event['eventType']>('event');
+export const NewEventModal: FC<Props> = memo(({ isOpen, date, onClose, onSubmit, initialValues }) => {
+    const [selectedEventType, setSelectedEventType] = useState<EventTypes>('event');
     const [eventColor, setEventColor] = useState('');
     const [description, setDescription] = useState('');
     const [title, setTitle] = useState('');
@@ -62,6 +63,7 @@ export const NewEventModal: FC<Props> = memo(({ isOpen, date, onClose, onSubmit 
                         selectedEventType={selectedEventType} />
 
                     <NewEventTypes
+                        initialValue={initialValues?.eventType}
                         onSubmit={setSelectedEventType}
                         selected={selectedEventType} />
                 </ModalWindowHeader>

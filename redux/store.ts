@@ -1,8 +1,10 @@
-import { combineReducers, configureStore, createStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { calendarReducer } from './reducer-calendar/reducer';
+import { dayReducer } from './reducer-day/reducer';
 
 const rootReducer = combineReducers({
 	calendar: calendarReducer,
+	day: dayReducer,
 });
 
 export const store = configureStore({

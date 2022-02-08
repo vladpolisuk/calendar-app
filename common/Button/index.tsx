@@ -1,5 +1,5 @@
-import React, { AllHTMLAttributes, FC, memo, ReactNode } from 'react';
-import styled from 'styled-components';
+import React, { ButtonHTMLAttributes, FC, memo, ReactNode } from 'react';
+import styled, { StyledComponent } from 'styled-components';
 
 const CancelButtonStyled = styled.button`
     width: 100%;
@@ -38,8 +38,9 @@ const DeleteEventButtonStyled = styled.button`
     color: white;   
 `;
 
-interface Props extends AllHTMLAttributes<HTMLButtonElement> {
-    variant: 'cancel' | 'success' | 'delete';
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+    variant?: 'cancel' | 'success' | 'delete' | 'custom';
+    Styled?: StyledComponent<"button", any, {}, never>;
 };
 
 const variants = {
@@ -62,6 +63,16 @@ const variants = {
     ),
 }
 
-export const Button: FC<Props> = memo(({ children, variant, ...props }) => {
-    return variants[variant](props, children);
+export const Button: FC<Props> = memo(({ children, variant = 'custom', Styled, ...props }) => {
+    if (variant !== 'custom') return variants[variant](props, children);
+
+    return Styled ? (
+        <Styled {...props}>
+            {children}
+        </Styled>
+    ) : (
+        <button {...props}>
+            {children}
+        </button>
+    )
 });

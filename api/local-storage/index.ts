@@ -19,6 +19,12 @@ export class LocalStorageAPI {
 		return parsedExistEvents;
 	}
 
+	getEventsByDate(date: string) {
+		const parsedExistEvents = this.getParsedEvents();
+		const eventsByDate = parsedExistEvents.filter((event) => event.eventDate === date);
+		return eventsByDate;
+	}
+
 	createNewEvent(newEvent: Event) {
 		const parsedExistEvents = this.getParsedEvents();
 		parsedExistEvents.push(newEvent);

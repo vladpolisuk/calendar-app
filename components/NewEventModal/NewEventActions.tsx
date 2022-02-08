@@ -20,6 +20,7 @@ export const NewEventActions: FC<Props> = memo(({ onSubmit, onClose, disabled, s
         <NewEventActionsStyled>
             <Button
                 type="submit"
+                disabled={disabled}
                 variant="success"
                 onClick={onSubmit}
                 aria-label={`Create ${selectedEventType}`}>
@@ -29,7 +30,6 @@ export const NewEventActions: FC<Props> = memo(({ onSubmit, onClose, disabled, s
             <Button
                 variant="cancel"
                 onClick={onClose}
-                disabled={disabled}
                 aria-label={`Dismiss ${selectedEventType}`}>
                 Dismiss
             </Button>
