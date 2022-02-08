@@ -13,7 +13,6 @@ const TitleInputStyled = styled.input`
     overflow: hidden;
     transition: 100ms;
     font-family: 'Inter', sans-serif;
-    margin-right: 10px;
     &:focus {
         border-color: white;
     }

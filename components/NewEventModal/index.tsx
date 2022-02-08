@@ -1,25 +1,29 @@
 import React, { FC, memo, useEffect, useState } from 'react';
-import { createPortal } from 'react-dom';
-import ReactFocusLock from 'react-focus-lock';
 import uniqid from 'uniqid';
+import { Modal } from '../../common/Modal';
+import { ModalWindow } from '../../common/Modal/ModalWindow';
+import { ModalWindowHeader } from '../../common/Modal/ModalWindowHeader';
 import { Event } from '../../redux/reducer-calendar/types';
-import { ModalWindowOverlay } from '../ModalWindowOverlay';
-import { NewEvent } from './NewEvent';
+import { ColorPicker } from '../../common/ColorPicker';
+import { NewEventActions } from './NewEventActions';
+import { NewEventDescription } from './NewEventDescription';
+import { NewEventTitle } from './NewEventTitle';
+import { NewEventTypes } from './NewEventTypes';
 
 interface Props {
-    isOpen: boolean;
     date: string;
-    onSubmit: (event: Event) => void;
+    isOpen: boolean;
     onClose: () => void;
+    onSubmit: (event: Event) => void;
 }
 
-export const NewEventModal: FC<Props> = memo(({ isOpen, onClose, date, onSubmit }) => {
+export const NewEventModal: FC<Props> = memo(({ isOpen, date, onClose, onSubmit }) => {
     const [selectedEventType, setSelectedEventType] = useState<Event['eventType']>('event');
     const [eventColor, setEventColor] = useState('');
     const [description, setDescription] = useState('');
     const [title, setTitle] = useState('');
 
-    const submit = () => {
+    const onSubmitHandler = () => {
         let color;
 
         if (eventColor) color = eventColor;
@@ -48,22 +52,36 @@ export const NewEventModal: FC<Props> = memo(({ isOpen, onClose, date, onSubmit 
         }
     }, [isOpen]);
 
-    return isOpen ? createPortal(
-        <ReactFocusLock>
-            <ModalWindowOverlay>
-                <NewEvent
-                    onClose={onClose}
-                    onSubmit={submit}
-                    title={title}
-                    description={description}
+    return (
+        <Modal isOpen={isOpen}>
+            <ModalWindow>
+                <ModalWindowHeader onClose={onClose}>
+                    <NewEventTitle
+                        value={title}
+                        onChange={setTitle}
+                        selectedEventType={selectedEventType} />
+
+                    <NewEventTypes
+                        onSubmit={setSelectedEventType}
+                        selected={selectedEventType} />
+                </ModalWindowHeader>
+
+                <NewEventDescription
+                    value={description}
+                    onChange={setDescription}
+                    selectedEventType={selectedEventType} />
+
+                <ColorPicker
                     eventColor={eventColor}
-                    setTitle={setTitle}
-                    setDescription={setDescription}
-                    setEventColor={setEventColor}
                     selectedEventType={selectedEventType}
-                    setSelectedEventType={setSelectedEventType} />
-            </ModalWindowOverlay>
-        </ReactFocusLock>,
-        document.querySelector('body') as Element
-    ) : null;
+                    onSubmit={setEventColor} />
+
+                <NewEventActions
+                    disabled={!title}
+                    onClose={onClose}
+                    onSubmit={onSubmitHandler}
+                    selectedEventType={selectedEventType} />
+            </ModalWindow>
+        </Modal>
+    )
 });

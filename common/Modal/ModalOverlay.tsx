@@ -1,7 +1,7 @@
 import React, { FC, memo } from 'react';
 import styled from 'styled-components';
 
-const ModalWindowOverlayStyled = styled.div`
+const ModalOverlayStyled = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,10 +14,10 @@ const ModalWindowOverlayStyled = styled.div`
     z-index: 4;
 `;
 
-export const ModalWindowOverlay: FC = memo(({ children }) => {
+export const ModalOverlay: FC = memo(({ children }) => {
     return (
-        <ModalWindowOverlayStyled>
+        <ModalOverlayStyled>
             {children}
-        </ModalWindowOverlayStyled>
+        </ModalOverlayStyled>
     )
 });

@@ -9,7 +9,7 @@ const NewEventTitleStyled = styled.input`
     border-bottom: 2px solid #ffffff3b;
     color: white;
     font-size: 20px;
-    max-width: 180px;
+    width: 100%;
     padding: 4px;
     overflow: hidden;
     transition: 100ms;

@@ -1,42 +1,11 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
+import { Button } from '../../common/Button';
 
 const EventEditorActionsStyled = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-`;
-
-const EditEventButtonStyled = styled.button`
-    width: 100%;
-    padding: 8px 10px;
-    border-radius: 5px;
-    border: none;
-    margin-right: 5px;
-    background-color: #356e45;
-    color: white;
-    font-size: 16px;
-`;
-
-const DismissEventButtonStyled = styled.button`
-    width: 100%;
-    padding: 8px 10px;
-    border-radius: 5px;
-    border: none;
-    font-size: 16px;
-    background-color: #525667;
-    color: white;
-    margin-right: 5px;
-`;
-
-const DeleteEventButtonStyled = styled.button`
-    width: 100%;
-    padding: 8px 10px;
-    border-radius: 5px;
-    border: none;
-    font-size: 16px;
-    background-color: #973333;
-    color: white;   
 `;
 
 interface Props {
@@ -49,24 +18,27 @@ interface Props {
 export const EventEditorActions: FC<Props> = ({ onSubmit, onClose, onDelete, selectedEventType }) => {
     return (
         <EventEditorActionsStyled>
-            <EditEventButtonStyled
+            <Button
                 type="submit"
+                variant='success'
                 onClick={onSubmit}
                 aria-label={`Edit ${selectedEventType}`}>
                 Edit {selectedEventType}
-            </EditEventButtonStyled>
+            </Button>
 
-            <DismissEventButtonStyled
+            <Button
+                variant='cancel'
                 onClick={onClose}
-                aria-label={`Dismiss editing ${selectedEventType}`}>
+                aria-label={`Dismiss creating ${selectedEventType}`}>
                 Dismiss
-            </DismissEventButtonStyled>
+            </Button>
 
-            <DeleteEventButtonStyled
+            <Button
+                variant='delete'
                 onClick={onDelete}
                 aria-label={`Delete ${selectedEventType}`}>
                 Delete
-            </DeleteEventButtonStyled>
+            </Button>
         </EventEditorActionsStyled>
     )
 };
