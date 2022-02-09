@@ -17,6 +17,9 @@ const NewEventTitleStyled = styled.input`
     &:focus {
         border-color: white;
     }
+    @media (max-width: 500px) {
+        margin-bottom: 10px;
+    }
 `;
 
 interface Props {

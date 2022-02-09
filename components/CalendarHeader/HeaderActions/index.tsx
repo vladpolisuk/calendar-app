@@ -1,7 +1,6 @@
 import moment from 'moment';
 import React, { MouseEventHandler } from 'react';
 import { FaCaretLeft, FaCaretRight } from 'react-icons/fa';
-import { FiSettings } from 'react-icons/fi';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../../hooks/store';
 import { setShowingDate } from '../../../redux/reducer-calendar/actions';
@@ -44,21 +43,18 @@ export const HeaderActions = () => {
                 text='Prev Month'
                 action={prevMonthAction}
                 icon={<FaCaretLeft />}
-                iconPosition="left" />
+                position="left" />
+
+            <HeaderAction
+                text='Today'
+                position='center'
+                action={todayAction} />
 
             <HeaderAction
                 text='Next Month'
                 action={nextMonthAction}
                 icon={<FaCaretRight />}
-                iconPosition="right" />
-
-            <HeaderAction
-                text='Today'
-                action={todayAction} />
-
-            <HeaderAction
-                icon={<FiSettings />}
-                iconPosition='center' />
+                position="right" />
         </HeaderActionsStyled>
     )
 };

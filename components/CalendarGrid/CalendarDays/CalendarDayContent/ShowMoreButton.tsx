@@ -11,9 +11,23 @@ const ShowMoreButtonStyled = styled.button`
     font-size: 13px;
     position: absolute;
     bottom: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     &:hover {
         color: #ffffff7d;
         border-color: #ffffff7d;
+    }
+    @media (max-width: 600px) {
+        display: none;
+    }
+`;
+
+const ShowMoreTextStyled = styled.p`
+    display: inline;
+    margin-right: 5px;
+    @media (max-width: 768px) {
+        display: none;
     }
 `;
 
@@ -27,7 +41,10 @@ export const ShowMoreButton: FC<Props> = ({ dayDate, moreEventsCount }) => {
 
     return (
         <ShowMoreButtonStyled onClick={openDayView}>
-            Show more +{moreEventsCount}
+            <ShowMoreTextStyled>
+                Show more
+            </ShowMoreTextStyled>
+            +{moreEventsCount}
         </ShowMoreButtonStyled>
     )
 };

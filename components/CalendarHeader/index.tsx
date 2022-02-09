@@ -15,6 +15,12 @@ const CalendarHeaderStyled = styled.header`
     color: white;
     margin-bottom: 20px;
     z-index: 4;
+    @media (max-width: 768px) {
+       padding: 18px;
+    }
+    @media (max-width: 500px) {
+       padding: 15px;
+    }
 `;
 
 export const CalendarHeader = () => {

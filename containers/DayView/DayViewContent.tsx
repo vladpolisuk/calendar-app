@@ -16,6 +16,9 @@ import { NewEventButton } from './NewEventButton';
 const DayViewContentStyled = styled.div`
     padding: 0 40px;
     margin-right: 10px;
+    @media (max-width: 500px) {
+        padding: 0 20px;
+    }
 `;
 
 export const DayViewContent = () => {

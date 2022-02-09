@@ -1,11 +1,15 @@
-import React, { FC, memo } from 'react';
+import React, { FC, Fragment, memo } from 'react';
 import styled from 'styled-components';
 import uniqid from 'uniqid';
 import { Event } from '../../../../redux/reducer-calendar/types';
 import { CalendarEvent } from './CalendarEvent';
+import { ThereAreEventsCircle } from './ThereAreEventsCircle';
 
 const CalendarDayContentStyled = styled.ul`
     width: 100%;
+    @media (max-width: 600px) {
+        display: none;
+    }
 `;
 
 interface Props {
@@ -47,8 +51,11 @@ export const CalendarDayContent: FC<Props> = memo(({
     const last4Events = components.slice(-4).reverse();
 
     return (
-        <CalendarDayContentStyled>
-            {last4Events}
-        </CalendarDayContentStyled>
+        <Fragment>
+            <CalendarDayContentStyled>
+                {last4Events}
+            </CalendarDayContentStyled>
+            <ThereAreEventsCircle eventCount={components.length} />
+        </Fragment>
     )
 })

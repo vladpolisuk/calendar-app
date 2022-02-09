@@ -24,6 +24,11 @@ const CalendarDayNumberButtonStyled = styled.button`
     &:hover {
         background: ${(props: { isActive: boolean }) => props.isActive ? '#3751c6' : '#353849'}
     }
+    @media (max-width: 600px) {
+        width: 30px;
+        height: 30px;
+        right: calc(50% - 15px)
+    }
 `;
 
 interface Props {

@@ -12,6 +12,7 @@ const ModalCloseButtonStyled = styled.button`
     padding: 5px 10px;
     border-radius: 3px;
     margin-left: 10px;
+    height: 34px;
     &:hover {
         color: white;
 	    border-color: white;

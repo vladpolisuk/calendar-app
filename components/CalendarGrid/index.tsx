@@ -11,6 +11,13 @@ const CalendarGridStyled = styled.div`
     margin-bottom: 100px;
     width: 100%;
     padding: 0 20px;
+    @media (max-width: 600px) {
+        padding: 0 10px;
+        margin-bottom: 40px;
+    }
+    @media (max-width: 421px) {
+        margin-bottom: 30px;
+    }
 `;
 
 export const CalendarGrid = () => {

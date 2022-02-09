@@ -10,9 +10,15 @@ import { CalendarDay } from './CalendarDay';
 
 const CalendarGridStyled = styled.ul`
     display: grid;
-    grid-template-columns: repeat(7, minmax(100px, 156px));
+    grid-template-columns: repeat(7, minmax(40px, 156px));
     grid-template-rows: repeat(5, 140px);
     grid-gap: 2px;
+    @media (max-width: 600px) {
+        grid-template-rows: repeat(5, 100px);
+    }
+    @media (max-width: 500px) {
+        grid-template-rows: repeat(5, 80px);
+    }
 `;
 
 export const CalendarDays = () => {

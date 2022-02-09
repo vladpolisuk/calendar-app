@@ -26,6 +26,12 @@ const LinkStyled = styled.a`
     transition: 10ms;
     &:hover {color: white}
     &:active {color: white}
+    @media (max-width: 500px) {
+        padding: 5px;
+    }
+    @media (max-width: 421px) {
+        width: 30px;
+    }
 `;
 
 const links = [

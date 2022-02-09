@@ -24,6 +24,13 @@ const CalendarDayButtonStyled = styled.button`
     cursor: auto;
     background: ${(props: { isAnotherMonth: boolean }) => props.isAnotherMonth ? '#1b1d24' : '#24262d'};
     &:hover { background: ${(props: { isAnotherMonth: boolean }) => props.isAnotherMonth ? '#1e2027' : '#282b33'} }
+    @media (max-width: 800px) {
+        padding: 36px 0px 0px;
+    }
+    @media (max-width: 600px) {
+       align-items: center;
+       padding: 45px 0 0;
+    }
 `;
 
 interface Props {
