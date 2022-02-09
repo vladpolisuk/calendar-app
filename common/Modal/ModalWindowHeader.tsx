@@ -12,7 +12,7 @@ const ModalWindowHeaderStyled = styled.div`
 
 const HeaderWrapperStyled = styled.div`
     display: flex;
-    width: 100%
+    width: 100%;
     @media (max-width: 500px) {
         flex-direction: column;
     }
