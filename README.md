@@ -5,8 +5,8 @@ This is my simple calendar app.
 
 Technologies:
 
-- React, Redux-Toolkit
-- Next.js, TypeScript
-- Moment.js
-- Styled Components
-- Vercel
+- [React](https://reactjs.org), [Redux-Toolkit](https://redux-toolkit.js.org/)
+- [Next.js](https://nextjs.org/), [TypeScript](https://www.typescriptlang.org/)
+- [Moment.js](https://momentjs.com/)
+- [Styled Components](https://styled-components.com/)
+- [Vercel](https://vercel.com)
