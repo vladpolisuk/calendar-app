@@ -1,4 +1,5 @@
 import moment from 'moment';
+import Head from 'next/head';
 import React from 'react';
 import { HiOutlineArrowLeft } from 'react-icons/hi';
 import styled from 'styled-components';
@@ -35,6 +36,9 @@ export const DayViewHeader = () => {
 
     return (
         <DayViewHeaderStyled>
+            <Head>
+                <title>{day} {month} {year}</title>
+            </Head>
             <BackButton Styled={BackButtonStyled}>
                 <HiOutlineArrowLeft size="25px" />
             </BackButton>
