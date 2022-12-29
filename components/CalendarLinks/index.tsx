@@ -37,10 +37,7 @@ const LinkStyled = styled.a`
 const links = [
     { href: 'https://github.com/vladislav124352/calendar-app', name: 'Project GitHub', icon: <FaGithub size="25px" /> },
     { href: 'https://github.com/vladislav124352', name: 'GitHub', icon: <FiGithub size="25px" /> },
-    { href: 'https://vk.com/vladislav124352', name: 'VK', icon: <FaVk size="25px" /> },
-    { href: 'https://facebook.com/vladislav124352', name: 'Facebook', icon: <FaFacebook size="25px" /> },
     { href: 'https://t.me/vladislav124352', name: 'Telegram', icon: <ImTelegram size="25px" /> },
-    { href: 'https://wa.me/+79586803972', name: 'WhatsApp', icon: <AiOutlineWhatsApp size="25px" /> },
     { href: 'mailto:vladpolisuk159@gmail.com', name: 'vladpolisuk159@gmail.com', icon: <SiGmail size="25px" /> },
 ]
 
