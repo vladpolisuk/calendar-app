@@ -1,5 +1,5 @@
-import React, { ButtonHTMLAttributes, FC, memo, ReactNode } from 'react';
-import styled, { StyledComponent } from 'styled-components';
+import { ButtonHTMLAttributes, FC, memo, ReactNode } from 'react';
+import styled from 'styled-components';
 
 const CancelButtonStyled = styled.button`
     width: 100%;
@@ -40,7 +40,7 @@ const DeleteEventButtonStyled = styled.button`
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
     variant?: 'cancel' | 'success' | 'delete' | 'custom';
-    Styled?: StyledComponent<"button", any, {}, never>;
+    Styled?: any;
 };
 
 const variants = {

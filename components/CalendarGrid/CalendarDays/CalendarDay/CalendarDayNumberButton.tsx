@@ -1,8 +1,12 @@
-import React, { FC, memo } from 'react';
+import { FC, memo } from 'react';
 import styled from 'styled-components';
 import { useOpenDayView } from '../../../../hooks/ui/useOpenDayView';
 
-const CalendarDayNumberButtonStyled = styled.button`
+interface CalendarDayNumberButtonStyledProps {
+    isActive: boolean;
+}
+
+const CalendarDayNumberButtonStyled = styled.button<CalendarDayNumberButtonStyledProps>`
     height: 27px;
     position: absolute;
     top: 5px;
@@ -19,10 +23,10 @@ const CalendarDayNumberButtonStyled = styled.button`
     border: none;
     z-index: 2;
     user-select: none;
-    color: ${(props: { isActive: boolean }) => props.isActive ? 'white' : '#cccce2'};
-    background: ${(props: { isActive: boolean }) => props.isActive ? '#243fb4' : 'transparent'};
+    color: ${({ isActive }) => isActive ? 'white' : '#cccce2'};
+    background: ${({ isActive }) => isActive ? '#243fb4' : 'transparent'};
     &:hover {
-        background: ${(props: { isActive: boolean }) => props.isActive ? '#3751c6' : '#353849'}
+        background: ${({ isActive }) => isActive ? '#3751c6' : '#353849'}
     }
     @media (max-width: 600px) {
         width: 30px;

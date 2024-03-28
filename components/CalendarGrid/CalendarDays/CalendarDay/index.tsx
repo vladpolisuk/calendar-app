@@ -1,9 +1,13 @@
-import React, { FC, memo, useMemo } from 'react';
+import { FC, memo } from 'react';
 import styled from 'styled-components';
 import { Event } from '../../../../redux/reducer-calendar/types';
 import { CalendarDayContent } from '../CalendarDayContent';
 import { ShowMoreButton } from '../CalendarDayContent/ShowMoreButton';
 import { CalendarDayNumberButton } from './CalendarDayNumberButton';
+
+interface CalendarDayButtonStyledProps {
+    isAnotherMonth: boolean;
+}
 
 const CalendarDayStyled = styled.li`
     width: 100%;
@@ -12,7 +16,7 @@ const CalendarDayStyled = styled.li`
     position: relative;
 `;
 
-const CalendarDayButtonStyled = styled.button`
+const CalendarDayButtonStyled = styled.button<CalendarDayButtonStyledProps>`
     width: 100%;
     height: 100%;
     padding: 36px 5px 5px;
@@ -22,8 +26,8 @@ const CalendarDayButtonStyled = styled.button`
     justify-content: flex-start;
     align-items: flex-start;
     cursor: auto;
-    background: ${(props: { isAnotherMonth: boolean }) => props.isAnotherMonth ? '#1b1d24' : '#24262d'};
-    &:hover { background: ${(props: { isAnotherMonth: boolean }) => props.isAnotherMonth ? '#1e2027' : '#282b33'} }
+    background: ${({ isAnotherMonth }) => isAnotherMonth ? '#1b1d24' : '#24262d'};
+    &:hover { background: ${({ isAnotherMonth }) => isAnotherMonth ? '#1e2027' : '#282b33'} }
     @media (max-width: 800px) {
         padding: 36px 0px 0px;
     }

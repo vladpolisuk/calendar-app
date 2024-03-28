@@ -1,4 +1,4 @@
-import React, { FC, memo } from 'react';
+import { FC, PropsWithChildren, memo } from 'react';
 import styled from 'styled-components';
 
 const ModalOverlayStyled = styled.div`
@@ -15,7 +15,7 @@ const ModalOverlayStyled = styled.div`
     padding: 20px;
 `;
 
-export const ModalOverlay: FC = memo(({ children }) => {
+export const ModalOverlay: FC<PropsWithChildren> = memo(({ children }) => {
     return (
         <ModalOverlayStyled>
             {children}

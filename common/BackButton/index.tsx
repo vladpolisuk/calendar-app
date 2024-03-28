@@ -1,9 +1,8 @@
 import { useRouter } from 'next/router';
-import React, { FC, HTMLAttributes } from 'react';
-import { StyledComponent } from 'styled-components';
+import { FC, HTMLAttributes } from 'react';
 
 interface Props extends HTMLAttributes<HTMLButtonElement> {
-    Styled?: StyledComponent<"button", any, {}, never>;
+    Styled?: any;
 }
 
 export const BackButton: FC<Props> = ({ children, Styled, ...props }) => {

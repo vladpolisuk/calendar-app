@@ -1,8 +1,10 @@
 import moment from 'moment';
-import { FC, ReactNode, useEffect } from 'react';
+import Head from 'next/head';
+import { FC, ReactNode, memo, useEffect } from 'react';
 import styled from 'styled-components';
-import { useAppDispatch } from '../hooks/store';
+import { useAppDispatch, useAppSelector } from '../hooks/store';
 import { setCurrentDate, setShowingDate } from '../redux/reducer-calendar/actions';
+import { getShowingDate } from '../redux/reducer-calendar/selectors';
 
 const CalendarStyled = styled.div`
     display: flex;
@@ -16,8 +18,10 @@ interface CalendarProviderProps {
     children: ReactNode;
 }
 
-export const CalendarProvider: FC<CalendarProviderProps> = ({ children }) => {
+export const CalendarProvider: FC<CalendarProviderProps> = memo(({ children }) => {
     const dispatch = useAppDispatch();
+    const showingDate = useAppSelector(getShowingDate);
+    const showingMonth = showingDate ? moment(showingDate, 'MM-YYYY').format('MMMM YYYY') : '';
 
     useEffect(() => {
         dispatch(setCurrentDate());
@@ -26,7 +30,12 @@ export const CalendarProvider: FC<CalendarProviderProps> = ({ children }) => {
 
     return (
         <CalendarStyled>
+            <Head>
+                <title>Calendar {showingMonth ? `: ${showingMonth}` : ''}</title>
+            </Head>
             {children}
         </CalendarStyled>
     )
-};
+});
+
+CalendarProvider.displayName = 'CalendarProvider';

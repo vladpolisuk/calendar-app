@@ -1,9 +1,13 @@
-import React, { FC, memo, MouseEventHandler } from 'react';
+import { FC, memo, MouseEventHandler } from 'react';
 import { MdBookmark, MdEventAvailable, MdOutlineTaskAlt } from 'react-icons/md';
 import styled from 'styled-components';
 import { Event } from '../../../../redux/reducer-calendar/types';
 
-const CalendarEventStyled = styled.button`
+interface CalendarEventStyledProps {
+    bgColor: string;
+}
+
+const CalendarEventStyled = styled.button<CalendarEventStyledProps>`
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -13,9 +17,9 @@ const CalendarEventStyled = styled.button`
     border: none;
     cursor: pointer;
     z-index: 2;
-    color: ${(props: { bgColor: string }) => props.bgColor === 'white' ? '#212639' : 'white'} ;
-    text-shadow: ${(props: { bgColor: string }) => props.bgColor === 'white' ? '-1px 1px 4px #0000002b' : '-1px 1px 4px #0000008c'} ; 
-    background-color: ${(props: { bgColor: string }) => props.bgColor}
+    color: ${({ bgColor }) => bgColor === 'white' ? '#212639' : 'white'} ;
+    text-shadow: ${({ bgColor }) => bgColor === 'white' ? '-1px 1px 4px #0000002b' : '-1px 1px 4px #0000008c'} ; 
+    background-color: ${({ bgColor }) => bgColor};
 `;
 
 const EventTitleStyled = styled.p`
@@ -52,4 +56,4 @@ export const CalendarEvent: FC<Props> = memo(({ openEventEditor, ...event }) => 
             </EventTitleStyled>
         </CalendarEventStyled>
     )
-})
+});

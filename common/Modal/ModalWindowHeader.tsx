@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC, PropsWithChildren } from 'react';
 import styled from 'styled-components';
 import { ModalCloseButton } from './ModalCloseButton';
 
@@ -18,7 +18,7 @@ const HeaderWrapperStyled = styled.div`
     }
 `;
 
-interface Props {
+interface Props extends PropsWithChildren {
     onClose: () => void;
 }
 

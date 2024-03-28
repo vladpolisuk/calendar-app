@@ -1,11 +1,15 @@
-import React, { FC, memo } from 'react';
+import { FC, memo } from 'react';
 import styled from 'styled-components';
 
-const WeekDayStyled = styled.li`
+interface WeekDayStyledProps {
+    isActive: boolean;
+}
+
+const WeekDayStyled = styled.li<WeekDayStyledProps>`
     display: flex;
     padding: 15px 8px;
     font-weight: 700;
-    color: ${(props: { isActive: boolean }) => props.isActive ? '#95a9ff' : '#e1e1ea'};
+    color: ${({ isActive }) => isActive ? '#95a9ff' : '#e1e1ea'};
     @media (max-width: 500px) {
         font-size: 15px;
         padding: 12px 8px;

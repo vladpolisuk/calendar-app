@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC, PropsWithChildren } from 'react';
 import styled, { keyframes } from 'styled-components';
 
 const EventEditorAnimation = keyframes`
@@ -20,7 +20,7 @@ const EventEditorStyled = styled.div`
     padding: 20px;
 `;
 
-export const ModalWindow: FC = ({ children }) => {
+export const ModalWindow: FC<PropsWithChildren> = ({ children }) => {
     return (
         <EventEditorStyled>
             {children}

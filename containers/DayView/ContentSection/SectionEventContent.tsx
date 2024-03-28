@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC, PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
 const SectionEventContentStyled = styled.div`
@@ -6,7 +6,7 @@ const SectionEventContentStyled = styled.div`
     font-size: 14px;
 `;
 
-export const SectionEventContent: FC = ({ children }) => {
+export const SectionEventContent: FC<PropsWithChildren> = ({ children }) => {
     return children ? (
         <SectionEventContentStyled>
             {children}

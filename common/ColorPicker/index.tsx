@@ -1,5 +1,10 @@
-import React, { FC, memo, MouseEventHandler, useEffect } from 'react';
+import { FC, memo, MouseEventHandler, useEffect } from 'react';
 import styled from 'styled-components';
+
+interface NewEventColorStyledProps {
+    color: string;
+    isSelected: boolean;
+}
 
 const NewEventColorPickerStyled = styled.div`
     display: flex;
@@ -9,16 +14,16 @@ const NewEventColorPickerStyled = styled.div`
     margin-bottom: 20px;
 `;
 
-const NewEventColorStyled = styled.button`
+const NewEventColorStyled = styled.button<NewEventColorStyledProps>`
     border-radius: 50%;
     width: 25px;
     height: 25px;
     margin-right: 5px;
     cursor: pointer;
     border: none;
-    background-color: ${(props: { color: string, isSelected: boolean }) => props.color};
-    transform: ${(props: { color: string, isSelected: boolean }) => props.isSelected ? 'scale(1.1)' : ''};
-    opacity: ${(props: { color: string, isSelected: boolean }) => props.isSelected ? '1' : '0.4'};
+    background-color: ${({ color }) => color};
+    transform: ${({ isSelected }) => isSelected ? 'scale(1.1)' : ''};
+    opacity: ${({ isSelected }) => isSelected ? '1' : '0.4'};
 `;
 
 interface Props {
@@ -35,59 +40,31 @@ export const ColorPicker: FC<Props> = memo(({ onSubmit, selectedEventType, event
         onSubmit(target.attributes[0].value);
     }
 
+    const colors = [
+        "#2c8ad3",
+        "#31b131",
+        "#dd9615",
+        "#d32a2a",
+        "#b9b915",
+        "#29a199",
+        "white",
+        "gray"
+    ];   
+
     useEffect(() => {
         if (initialColor) onSubmit(initialColor)
     }, [])
 
     return (
         <NewEventColorPickerStyled>
-            <NewEventColorStyled
-                color="#2c8ad3"
-                onClick={selectEventColor}
-                aria-label={`Choose blue color for ${selectedEventType}`}
-                isSelected={eventColor === '#2c8ad3' || !eventColor} />
-
-            <NewEventColorStyled
-                color="#31b131"
-                onClick={selectEventColor}
-                aria-label={`Choose green color for ${selectedEventType}`}
-                isSelected={eventColor === '#31b131' || !eventColor} />
-
-            <NewEventColorStyled
-                color="#dd9615"
-                onClick={selectEventColor}
-                aria-label={`Choose orange color for ${selectedEventType}`}
-                isSelected={eventColor === '#dd9615' || !eventColor} />
-
-            <NewEventColorStyled
-                color="#d32a2a"
-                onClick={selectEventColor}
-                aria-label={`Choose red color for ${selectedEventType}`}
-                isSelected={eventColor === '#d32a2a' || !eventColor} />
-
-            <NewEventColorStyled
-                color="#b9b915"
-                onClick={selectEventColor}
-                aria-label={`Choose yellow color for ${selectedEventType}`}
-                isSelected={eventColor === '#b9b915' || !eventColor} />
-
-            <NewEventColorStyled
-                color="#29a199"
-                onClick={selectEventColor}
-                aria-label={`Choose light blue color for ${selectedEventType}`}
-                isSelected={eventColor === '#29a199' || !eventColor} />
-
-            <NewEventColorStyled
-                color="white"
-                onClick={selectEventColor}
-                aria-label={`Choose white color for ${selectedEventType} `}
-                isSelected={eventColor === 'white' || !eventColor} />
-
-            <NewEventColorStyled
-                color="gray"
-                onClick={selectEventColor}
-                aria-label={`Choose gray color for ${selectedEventType} `}
-                isSelected={eventColor === 'gray' || !eventColor} />
+            {colors.map(color => (
+                <NewEventColorStyled
+                    key={color}
+                    color={color}
+                    onClick={selectEventColor}
+                    aria-label={`Choose color for ${selectedEventType}`}
+                    isSelected={eventColor === color || !eventColor} />
+            ))}
         </NewEventColorPickerStyled>
     )
 });

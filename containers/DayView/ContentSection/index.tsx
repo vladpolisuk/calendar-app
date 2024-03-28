@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC, PropsWithChildren } from 'react';
 import styled from 'styled-components';
 import { ContentSectionContent } from './ContentSectionContent';
 
@@ -23,7 +23,7 @@ const ContentSectionHeading = styled.p`
     font-size: 18px;
 `;
 
-interface Props {
+interface Props extends PropsWithChildren {
     name: 'Events' | 'Tasks' | 'Reminders';
 }
 

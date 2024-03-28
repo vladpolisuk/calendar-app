@@ -2,17 +2,21 @@ import { FC, memo, MouseEventHandler, useEffect } from 'react';
 import styled from 'styled-components';
 import { EventTypes } from '../../redux/reducer-calendar/types';
 
+interface NewEventTypeStyledProps {
+    isSelected: boolean;
+}
+
 const NewEventTypesStyled = styled.div`
     display: flex;
 `;
 
-const NewEventTypeStyled = styled.button`
+const NewEventTypeStyled = styled.button<NewEventTypeStyledProps>`
     background: transparent;
     padding: 5px 8px;
     margin-right: 5px;
     border-radius: 3px;
-    border: ${(props: { isSelected: boolean }) => props.isSelected ? '2px solid white' : '2px solid gray'};
-    color: ${(props: { isSelected: boolean }) => props.isSelected ? 'white' : 'gray'};
+    border: ${({ isSelected }) => isSelected ? '2px solid white' : '2px solid gray'};
+    color: ${({ isSelected }) => isSelected ? 'white' : 'gray'};
     &:last-child {
         margin-right: 0;
     }

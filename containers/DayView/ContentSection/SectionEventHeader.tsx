@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC, PropsWithChildren } from 'react';
 import { MdBookmark, MdEdit, MdEventAvailable, MdOutlineTaskAlt } from 'react-icons/md';
 import styled from 'styled-components';
 import { Button } from '../../../common/Button';
@@ -31,8 +31,8 @@ const EventHeaderTitleStyled = styled.div`
 
 const ActionButtonStyled = styled.button`
     background: transparent;
-    border: 2px solid ${(props: { color: string }) => props.color === 'white' ? '#16171c' : 'white'};
-    color: ${(props: { color: string }) => props.color === 'white' ? '#16171c' : 'white'};
+    border: 2px solid ${({ color }) => color === 'white' ? '#16171c' : 'white'};
+    color: ${({ color }) => color === 'white' ? '#16171c' : 'white'};
     display: flex;
     border-radius: 50%;
     align-items: center;
@@ -45,7 +45,7 @@ const ActionButtonStyled = styled.button`
     }
 `;
 
-interface Props {
+interface Props extends PropsWithChildren {
     event: Event;
     openEventEditor: (event: Event) => void;
 }

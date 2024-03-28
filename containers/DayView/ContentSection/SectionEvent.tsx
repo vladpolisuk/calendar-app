@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC, PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
 const SectionEventStyled = styled.div`
@@ -7,11 +7,11 @@ const SectionEventStyled = styled.div`
     width: 100%;
     padding: 10px;
     border-radius: 3px;
-    background: ${(props: { color: string }) => props.color};
-    color: ${(props: { color: string }) => props.color === 'white' ? 'black' : 'white'};
+    background: ${({ color }) => color};
+    color: ${({ color }) => color === 'white' ? 'black' : 'white'};
 `;
 
-interface Props {
+interface Props extends PropsWithChildren {
     color: string;
 }
 
