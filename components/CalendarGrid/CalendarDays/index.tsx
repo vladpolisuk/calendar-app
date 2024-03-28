@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../../hooks/store';
 import { createNewEvent, deleteEventById, editEventById, setCurrentDaysOfCalendar } from '../../../redux/reducer-calendar/actions';
@@ -32,6 +32,7 @@ export const CalendarDays = () => {
     const [modalDate, setModalDate] = useState('');
 
     const onSubmitNewEvent = (event: Event) => {
+        // @ts-ignore
         dispatch(createNewEvent(event));
     }
 
@@ -45,10 +46,12 @@ export const CalendarDays = () => {
     }
 
     const onSubmitChangedEvent = (eventId: string, event: ChangedEventData) => {
+        // @ts-ignore
         dispatch(editEventById(eventId, event));
     }
 
     const onDeleteEvent = (eventId: string) => {
+        // @ts-ignore
         dispatch(deleteEventById(eventId));
     }
 

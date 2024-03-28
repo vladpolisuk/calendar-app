@@ -1,6 +1,6 @@
-import React, { FC, memo, MouseEventHandler, useEffect } from 'react';
+import { FC, memo, MouseEventHandler, useEffect } from 'react';
 import styled from 'styled-components';
-import { Event, EventTypes } from '../../redux/reducer-calendar/types';
+import { EventTypes } from '../../redux/reducer-calendar/types';
 
 const NewEventTypesStyled = styled.div`
     display: flex;

@@ -1,8 +1,8 @@
 import moment from 'moment';
-import React, {FC, useEffect} from 'react';
+import { FC, useEffect } from 'react';
 import styled from 'styled-components';
-import {useAppDispatch} from '../hooks/store';
-import {setCurrentDate, setShowingDate} from '../redux/reducer-calendar/actions';
+import { useAppDispatch } from '../hooks/store';
+import { setCurrentDate, setShowingDate } from '../redux/reducer-calendar/actions';
 
 const CalendarStyled = styled.div`
     display: flex;

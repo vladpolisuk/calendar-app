@@ -3,9 +3,7 @@ import { AppDispatch } from '../store';
 import { dayActions } from './reducer';
 
 export const setDayDate = (date: string) => {
-	return async (dispatch: AppDispatch) => {
-		dispatch(dayActions.settedDate(date));
-	};
+	return dayActions.settedDate(date)
 };
 
 export const setDayEvents = (date: string) => {

@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { EventEditorModal } from '../../components/EventEditorModal';
 import { NewEventModal } from '../../components/NewEventModal';
@@ -40,15 +40,18 @@ export const DayViewContent = () => {
     }
 
     const onSubmitNewEvent = (event: Event) => {
+        // @ts-ignore
         dispatch(createNewEvent(event));
         onCloseNewEventModal();
     }
 
     const onSubmitChangedEvent = (eventId: string, event: ChangedEventData) => {
+        // @ts-ignore
         dispatch(editEventById(eventId, event));
     }
 
     const onDeleteEvent = (eventId: string) => {
+        // @ts-ignore
         dispatch(deleteEventById(eventId));
     }
 
@@ -105,6 +108,7 @@ export const DayViewContent = () => {
     ))
 
     useEffect(() => {
+        // @ts-ignore
         if (date) dispatch(setDayEvents(date));
     }, [date, isOpenNewEventModal, isOpenEditEventModal])
 
