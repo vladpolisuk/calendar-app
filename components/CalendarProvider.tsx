@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { FC, useEffect } from 'react';
+import { FC, ReactNode, useEffect } from 'react';
 import styled from 'styled-components';
 import { useAppDispatch } from '../hooks/store';
 import { setCurrentDate, setShowingDate } from '../redux/reducer-calendar/actions';
@@ -12,7 +12,11 @@ const CalendarStyled = styled.div`
     width: 100%;
 `;
 
-export const CalendarProvider: FC = ({children}) => {
+interface CalendarProviderProps {
+    children: ReactNode;
+}
+
+export const CalendarProvider: FC<CalendarProviderProps> = ({ children }) => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
