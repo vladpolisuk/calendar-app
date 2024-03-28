@@ -35,10 +35,10 @@ const LinkStyled = styled.a`
 `;
 
 const links = [
-    { href: 'https://github.com/vladislav124352/calendar-app', name: 'Project GitHub', icon: <FaGithub size="25px" /> },
-    { href: 'https://github.com/vladislav124352', name: 'GitHub', icon: <FiGithub size="25px" /> },
-    { href: 'https://t.me/vladislav124352', name: 'Telegram', icon: <ImTelegram size="25px" /> },
-    { href: 'mailto:vladpolisuk159@gmail.com', name: 'vladpolisuk159@gmail.com', icon: <SiGmail size="25px" /> },
+    { href: 'https://github.com/vladpolisuk/calendar-app', name: 'Project GitHub', icon: <FaGithub size="25px" /> },
+    { href: 'https://github.com/vladpolisuk', name: 'GitHub', icon: <FiGithub size="25px" /> },
+    { href: 'https://t.me/vladpolisuk', name: 'Telegram', icon: <ImTelegram size="25px" /> },
+    { href: 'mailto:vlad@polisuk.ru', name: 'vlad@polisuk.ru', icon: <SiGmail size="25px" /> },
 ]
 
 export const CalendarLinks = () => {
